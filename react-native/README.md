@@ -16,7 +16,7 @@ To complete the steps in this example the following software is needed:
 
 ## Using React Native for Plaid Link
 
-* Clone the [Plaid Link](https://github.com/plaid/link) repository
+* Clone the [Plaid Link](https://github.com/plaid/link-examples) repository
 * Add this `react-native-plaid-link` component to your react-native project and install the necessary dependencies:
 ```sh
   % cd $PATH_TO_YOUR_REACT_NATIVE_PROJECT

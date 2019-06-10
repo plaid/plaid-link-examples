@@ -1,6 +1,6 @@
 /**
  * Sample App Using React Native Plaid Link
- * https://github.com/plaid/link/tree/master/react-native/demo
+ * https://github.com/plaid/link-examples/tree/master/react-native/demo
  * @flow
  */
 
