@@ -9,8 +9,8 @@ between your native app and the WebView. See the sample apps below for an
 example integration, and checkout the [WebView docs][link-docs-webview] for more
 information:
 
-- [iOS WKWebView in Swift](examples/wkwebview)
-- [Android WebView](examples/android)
+- [iOS WKWebView in Swift](wkwebview)
+- [Android WebView](android)
 
 [link-docs-webview]: https://plaid.com/docs/api#webview-integration
 [scheme-protocol]: https://en.wikipedia.org/wiki/Uniform_Resource_Identifier
