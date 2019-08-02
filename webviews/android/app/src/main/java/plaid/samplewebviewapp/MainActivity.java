@@ -28,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
         linkInitializeOptions.put("selectAccount", "true");
         linkInitializeOptions.put("webhook", "http://requestb.in");
         linkInitializeOptions.put("baseUrl", "https://cdn.plaid.com/link/v2/stable/link.html");
+
+        // Optionally specify email address and legal name for microdeposits support
+        linkInitializeOptions.put("userEmailAddress", "USER_EMAIL_ADDRESS");
+        linkInitializeOptions.put("userLegalName", "USER_LEGAL_NAME");
+
         // If initializing Link in PATCH / update mode, also provide the public_token
         // linkInitializeOptions.put("token", "PUBLIC_TOKEN")
 
