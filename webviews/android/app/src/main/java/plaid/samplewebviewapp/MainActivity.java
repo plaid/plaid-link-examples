@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         linkInitializeOptions.put("webhook", "http://requestb.in");
         linkInitializeOptions.put("baseUrl", "https://cdn.plaid.com/link/v2/stable/link.html");
 
-        // Optionally specify email address and legal name for microdeposits support
+        // Optionally specify email address and legal name for microdeposits. http://plaid.com/docs#auth
         linkInitializeOptions.put("userEmailAddress", "USER_EMAIL_ADDRESS");
         linkInitializeOptions.put("userLegalName", "USER_LEGAL_NAME");
 
