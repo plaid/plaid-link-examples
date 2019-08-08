@@ -3,10 +3,8 @@ Pod::Spec.new do |s|
   s.name         = "RNLinkkit"
   s.version      = "1.0.0"
   s.summary      = "RNLinkkit"
-  s.description  = <<-DESC
-                  RNLinkkit
-                   DESC
-  s.homepage     = ""
+  s.description  = "React Native LinkKit"
+  s.homepage     = "https://github.com/plaid/plaid-link-examples/tree/master/react-native"
   s.license      = "MIT"
   # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
   s.author             = { "author" => "author@domain.cn" }
