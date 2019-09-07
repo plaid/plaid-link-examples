@@ -41,7 +41,7 @@ To complete the steps in this example the following software is needed:
 ```
 * Next, when you would like to show the Plaid Link flow call `open()` on the `linkHandler`, e.g. `this.linkHandler.open();` which will modally present Plaid Link and guide the user through the process of linking their account with your application through Plaid
 * Once the user has completed, exited, or errored out of the flow the appropriate callback method is invoked
-* A detailed working example can be found in [`react-native/demo/lib/App.js`](/tree/master/react-native/demo/lib/App.js)
+* A detailed working example can be found in [`react-native/demo/App.js`](/react-native/demo/App.js)
 
 ## About the linkdemo_reactnative Xcode project
 
