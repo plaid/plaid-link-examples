@@ -22,7 +22,7 @@ To complete the steps in this example the following software is needed:
   % cd $PATH_TO_YOUR_REACT_NATIVE_PROJECT
   % yarn add file:$PATH_TO_YOUR_CLONE_OF_THIS_REPO/react-native/linkkit
   % yarn install
-  % react-native link react-native-plaid-link
+  % yarn react-native link react-native-plaid-link
 ```
 * Integrate the native Plaid Link for iOS SDK (LinkKit.framework) into the iOS part of your react-native project, see the [documentation](https://plaid.com/docs/link/ios/) for details.
 * In your `App.js` import Plaid Link using:
