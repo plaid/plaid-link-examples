@@ -22,7 +22,7 @@ To complete the steps in this example the following software is needed:
   % cd $PATH_TO_YOUR_REACT_NATIVE_PROJECT
   % yarn add file:$PATH_TO_YOUR_CLONE_OF_THIS_REPO/react-native/linkkit
   % yarn install
-  % react-native link react-native-plaid-link
+  % yarn react-native link react-native-plaid-link
 ```
 * Integrate the native Plaid Link for iOS SDK (LinkKit.framework) into the iOS part of your react-native project, see the [documentation](https://plaid.com/docs/link/ios/) for details.
 * In your `App.js` import Plaid Link using:
@@ -41,7 +41,7 @@ To complete the steps in this example the following software is needed:
 ```
 * Next, when you would like to show the Plaid Link flow call `open()` on the `linkHandler`, e.g. `this.linkHandler.open();` which will modally present Plaid Link and guide the user through the process of linking their account with your application through Plaid
 * Once the user has completed, exited, or errored out of the flow the appropriate callback method is invoked
-* A detailed working example can be found in [`react-native/demo/lib/App.js`](/tree/master/react-native/demo/lib/App.js)
+* A detailed working example can be found in [`react-native/demo/App.js`](/react-native/demo/App.js)
 
 ## About the linkdemo_reactnative Xcode project
 
