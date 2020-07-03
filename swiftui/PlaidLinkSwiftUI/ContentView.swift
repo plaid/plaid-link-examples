@@ -40,7 +40,8 @@ struct LinkController: UIViewControllerRepresentable {
     }
     
     func makeUIViewController(context: Context) -> PLKPlaidLinkViewController {
-        let configuration = PLKConfiguration(key: "9a68f1bb1cbc223fff6a70adb33548", env: .sandbox, product: [.transactions])
+        #warning("Replace <#PUBLC_KEY#> below with the public key retrieved from the Plaid dashboard")
+        let configuration = PLKConfiguration(key: "<#PUBLIC_KEY#>", env: .sandbox, product: [.transactions])
         let vc = PLKPlaidLinkViewController(configuration: configuration, delegate: context.coordinator)
         return vc
     }

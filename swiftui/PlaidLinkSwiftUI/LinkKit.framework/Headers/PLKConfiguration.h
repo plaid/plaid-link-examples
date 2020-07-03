@@ -59,6 +59,9 @@ PLK_EXTERN NSString* const kPLKTestKey DEPRECATED_MSG_ATTRIBUTE("the legacy API 
 /// A Plaid public_key that can be used for testing longtail when using the legacy API and PLKEnvironmentTartan.
 PLK_EXTERN NSString* const kPLKTestKeyLongtailAuth DEPRECATED_MSG_ATTRIBUTE("the legacy API is no longer supported. Use APIv2 and PLKEnvironmentSandbox with your own public key instead");
 
+/// A Plaid public_key to use when using the item-add flow.
+PLK_EXTERN NSString* const kPLKUseItemAddTokenInsteadOfPublicKey;
+
 // Keys customizing panes, see customizeWithDictionary:
 /// This pane is shown at the end of an successful update flow.
 PLK_EXTERN NSString* const kPLKConnectedPaneKey;
@@ -135,8 +138,23 @@ PLK_EXTERN NSString* const kPLKCustomizationExitButtonKey;
 /// A list of ISO 3166-1 alpha-2 country codes, used to select institutions available in the given countries.
 @property (copy,nonatomic) NSArray<NSString*>* _Nullable countryCodes;
 
-/// A map of account types and subtypes, used to select institutions with support for the requested subtypes
+/// A map of account types and subtypes, used to select institutions with support for the requested subtypes.
 @property (copy,nonatomic) NSDictionary<NSString*, NSArray<NSString*>*>* _Nullable accountSubtypes;
+
+/**
+ An URL that has been registered with Plaid for OpenBanking App-to-App authentication
+ and is set up as an Apple universal link for your application.
+ */
+@property (copy,nonatomic) NSURL* _Nullable oauthRedirectUri;
+
+/**
+ The oauthNonce must be uniquely generated per login, it must not be contained within the oauthRedirectUri,
+ and must be separate from any user identifiers you pass with the oauthRedirectUri.
+ */
+@property (copy,nonatomic) NSString* _Nullable oauthNonce;
+
+/// The name of the specific customization to initialize with. Will use 'default' if none is passed.
+@property (copy,nonatomic) NSString* _Nullable linkCustomizationName;
 
 /**
  Specify a Plaid-supported language to localize Link. English ('en') will be used by default.
@@ -170,6 +188,7 @@ PLK_EMPTY_INIT_UNAVAILABLE;
  it initializes a PLKConfiguration object with the provided arguments.
 
  @param key The public_key associated with your account. Available from https://dashboard.plaid.com/account/keys.
+            For link token based flows use `kPLKUseItemAddTokenInsteadOfPublicKey`.
  @param env The Plaid API environment on which to create user accounts
  @param product The Plaid products you wish to use.
  @param selectAccount The selectAccount parameter controls whether or not your Link integration uses the Select Account view.
@@ -191,6 +210,7 @@ PLK_EMPTY_INIT_UNAVAILABLE;
  Initializes a PLKConfiguration object with the provided arguments.
 
  @param key The public_key associated with your account. Available from https://dashboard.plaid.com/account/keys.
+            For link token based flows use `kPLKUseItemAddTokenInsteadOfPublicKey`.
  @param env The Plaid API environment on which to create user accounts
  @param product The Plaid products you wish to use.
  @return A PLKConfiguration object initialized with the given arguments.
