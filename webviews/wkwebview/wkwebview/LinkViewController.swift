@@ -125,11 +125,16 @@ class LinkViewController: UIViewController, WKNavigationDelegate {
             // Handle http:// and https:// links inside of Plaid Link,
             // and open them in a new Safari page. This is necessary for links
             // such as "forgot-password" and "locked-account"
-            UIApplication.shared.open(navigationAction.request.url!, options: [:], completionHandler: nil)
+            UIApplication.shared.open(navigationAction.request.url!, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
             decisionHandler(.cancel)
         } else {
             print("Unrecognized URL scheme detected that is neither HTTP, HTTPS, or related to Plaid Link: \(navigationAction.request.url?.absoluteString)");
             decisionHandler(.allow)
         }
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }
