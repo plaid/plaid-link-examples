@@ -48,16 +48,15 @@ class LinkViewController: UIViewController, WKNavigationDelegate {
 
     // generateLinkInitializationURL :: create the link.html url with query parameters
     func generateLinkInitializationURL() -> String {
+        // Create a new link_token via the /link/token/create endpoint. You will be
+        // able to configure this link_token to control Link behavior. To learn more
+        // about how to create a link_token, visit https://plaid.com/docs/#create-link-token.
+        //
+        // After creating a link_token, replace <#GENERATED_LINK_TOKEN#> with it below.
         let config = [
-            "key": "[PLAID_PUBLIC_KEY]",
-            "env": "sandbox",
-            "apiVersion": "v2", // set this to "v1" if using the legacy Plaid API
-            "product": "auth",
-            "selectAccount": "true",
-            "clientName": "Test App",
+            "token": "<#GENERATED_LINK_TOKEN#>"
             "isMobile": "true",
             "isWebview": "true",
-            "webhook": "https://requestb.in",
         ]
 
         // Build a dictionary with the Link configuration options
