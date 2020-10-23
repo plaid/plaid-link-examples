@@ -16,9 +16,13 @@ final class LinkViewController: UIViewController, WKNavigationDelegate {
         /// This should be the same `redirect_uri` used when creating a link token via https://plaid.com/docs/api/tokens/#linktokencreate
         let redirectURI = URL(string: "<#YOUR_APPLICATION_REDIRECT_URI#>")!
 
+        // Remove any trailing suffixes to normalize comparison.
+        let urlPath = url.path.hasSuffix("/") ? String(url.path.dropLast()) : url.path
+        let redirectURIPath = redirectURI.path.hasSuffix("/") ? String(redirectURI.path.dropLast()) : redirectURI.path
+
         // If the loaded url matches the redirectURI, then re-initialize the webview to complete the
         // authentication flow with the additional `receivedRedirectUri` parameter.
-        if redirectURI.host == url.host && redirectURI.path == url.path && redirectURI.scheme == url.scheme {
+        if redirectURI.host == url.host && redirectURIPath == urlPath && redirectURI.scheme == url.scheme {
             let initialURL = generateLinkInitializationURL()
             if let newURL = initialURL.updating(value: url.absoluteString, for: "receivedRedirectUri") {
                 webView.load(URLRequest(url: newURL))
@@ -160,12 +164,14 @@ final class LinkViewController: UIViewController, WKNavigationDelegate {
     }
 
     /// getUrlParams - parse query parameters into a Dictionary
-    private func getUrlParams(url: URL) -> Dictionary<String, String> {
-        let queryItems = URLComponents(string: (url.absoluteString))?.queryItems
+    private func getUrlParams(url: URL) -> [String: String] {
+        guard let queryItems = URLComponents(string: (url.absoluteString))?.queryItems else {
+            return [:]
+        }
         return Dictionary(
             uniqueKeysWithValues: zip(
                 queryItems.map { return $0.name },
-                queryItems.map { return $0.value }
+                queryItems.map { return $0.value ?? "" }
             )
         )
     }
