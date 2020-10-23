@@ -72,10 +72,14 @@ final class LinkViewController: UIViewController, WKNavigationDelegate {
 
                 // Parse data passed from Link into a dictionary
                 // This includes the public_token as well as account and institution metadata
-                print("Public Token: \(queryParams["public_token"] ?? "")");
-                print("Account ID: \(queryParams["account_id"] ?? "")");
-                print("Institution type: \(queryParams["institution_type"] ?? "")");
-                print("Institution name: \(queryParams["institution_name"] ?? "")");
+                print(
+                    """
+                    Public Token: \(queryParams["public_token"] ?? "")
+                    Account ID: \(queryParams["account_id"] ?? "")
+                    Institution type: \(queryParams["institution_type"] ?? "")
+                    Institution name: \(queryParams["institution_name"] ?? "")
+                    """
+                )
                 break
 
             case "exit":
