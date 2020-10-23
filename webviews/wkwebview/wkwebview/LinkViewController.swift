@@ -161,10 +161,13 @@ final class LinkViewController: UIViewController, WKNavigationDelegate {
 
     /// getUrlParams - parse query parameters into a Dictionary
     private func getUrlParams(url: URL) -> Dictionary<String, String> {
-        var paramsDictionary = [String: String]()
         let queryItems = URLComponents(string: (url.absoluteString))?.queryItems
-        queryItems?.forEach { paramsDictionary[$0.name] = $0.value }
-        return paramsDictionary
+        return Dictionary(
+            uniqueKeysWithValues: zip(
+                queryItems.map { return $0.name },
+                queryItems.map { return $0.value }
+            )
+        )
     }
 }
 
