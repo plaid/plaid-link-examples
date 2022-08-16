@@ -62,7 +62,7 @@ final class LinkViewController: UIViewController, WKNavigationDelegate, WKUIDele
         windowFeatures: WKWindowFeatures
     ) -> WKWebView? {
         guard let url = navigationAction.request.url else {
-            return
+            return nil
         }
 
         // Open the external URL in Safari
