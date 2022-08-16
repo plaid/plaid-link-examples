@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
-final class LinkViewController: UIViewController, WKNavigationDelegate {
+final class LinkViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
 
     /// `handleRedirctURL` checks the `url` to see if it matches the redirect url used when creating a link token.
     /// If so, it re-initializes the webview to finish the link session. Returns `true` if handled, `false` otherwise.
@@ -38,6 +38,7 @@ final class LinkViewController: UIViewController, WKNavigationDelegate {
         super.viewDidLoad()
 
         webView.navigationDelegate = self
+        webView.uiDelegate = self
         webView.allowsBackForwardNavigationGestures = false
         webView.frame = view.frame
         webView.scrollView.bounces = false
@@ -50,6 +51,23 @@ final class LinkViewController: UIViewController, WKNavigationDelegate {
 
     override var prefersStatusBarHidden : Bool {
         return true
+    }
+
+    // MARK: WKUIDelegate
+
+    func webView(
+        _ webView: WKWebView,
+        createWebViewWith configuration: WKWebViewConfiguration,
+        for navigationAction: WKNavigationAction,
+        windowFeatures: WKWindowFeatures
+    ) -> WKWebView? {
+        guard let url = navigationAction.request.url else {
+            return nil
+        }
+
+        // Open the external URL in Safari
+        UIApplication.shared.open(url)
+        return nil
     }
 
     // MARK: WKNavigationDelegate
