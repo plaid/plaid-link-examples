@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
 
             launch(Dispatchers.Main) {
                 viewModel.linkInitializationUrl =
-                    "$PLAID_LINK_BASE_URL?isWebview=true?isMobile=true&token=$linkToken"
+                    "$PLAID_LINK_BASE_URL?isWebview=true&isMobile=true&token=$linkToken"
 
                 // Initialize Link by loading the Link initialization URL in the Webview
                 viewModel.linkInitializationUrl?.let {
