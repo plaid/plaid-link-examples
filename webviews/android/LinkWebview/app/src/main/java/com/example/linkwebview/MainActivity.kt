@@ -159,7 +159,7 @@ class MainActivity : ComponentActivity() {
     // You can copy-paste a token in from a curl.
     // curl -i -X POST --header 'Content-Type: application/json' -d'{"country_codes":["US"], "client_name": "<REPLACE>", "client_id":"<REPLACE>", "secret": "<REPLACE>>", "language": "en", "products":["auth"], "user": {"client_user_id": "xxxx"}}' https://sandbox.plaid.com/link/token/create
     private suspend fun generateLinkToken(): String {
-         return "link-sandbox-01acb0e5-b186-4a37-a23f-40d3e8c7a34d"
+         return "link-sandbox-1234"
     }
 
     // Parse a Link redirect URL querystring into a HashMap for easy manipulation and access
