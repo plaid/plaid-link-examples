@@ -54,8 +54,6 @@ class MainActivity : ComponentActivity() {
             // Example url: "https://cdn.plaid.com/link/v2/stable/link.html?
             // isWebview=true&token=SAME_GENERATED_LINK_TOKEN_AS_INITIAL_SESSION
             // &receivedRedirectUri=https://example.com/oauth-page?oauth_state_id=9d5feadd-a873-43eb-97ba-422f35ce849b
-//            val newUrl = "${viewModel.linkInitializationUrl}&receivedRedirectUri=${receivedRedirectUri}"
-
             val newUrl = Uri.parse(viewModel.linkInitializationUrl).buildUpon().appendQueryParameter("receivedRedirectUri", receivedRedirectUri.toString()).toString()
             plaidLinkWebview.loadUrl(newUrl)
             return
