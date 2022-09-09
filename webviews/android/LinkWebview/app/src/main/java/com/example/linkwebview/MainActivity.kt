@@ -54,7 +54,9 @@ class MainActivity : ComponentActivity() {
             // Example url: "https://cdn.plaid.com/link/v2/stable/link.html?
             // isWebview=true&token=SAME_GENERATED_LINK_TOKEN_AS_INITIAL_SESSION
             // &receivedRedirectUri=https://example.com/oauth-page?oauth_state_id=9d5feadd-a873-43eb-97ba-422f35ce849b
-            val newUrl = "${viewModel.linkInitializationUrl}&receivedRedirectUri=${receivedRedirectUri}"
+//            val newUrl = "${viewModel.linkInitializationUrl}&receivedRedirectUri=${receivedRedirectUri}"
+
+            val newUrl = Uri.parse(viewModel.linkInitializationUrl).buildUpon().appendQueryParameter("receivedRedirectUri", receivedRedirectUri.toString()).toString()
             plaidLinkWebview.loadUrl(newUrl)
             return
         }
@@ -159,7 +161,7 @@ class MainActivity : ComponentActivity() {
     // You can copy-paste a token in from a curl.
     // curl -i -X POST --header 'Content-Type: application/json' -d'{"country_codes":["US"], "client_name": "<REPLACE>", "client_id":"<REPLACE>", "secret": "<REPLACE>>", "language": "en", "products":["auth"], "user": {"client_user_id": "xxxx"}}' https://sandbox.plaid.com/link/token/create
     private suspend fun generateLinkToken(): String {
-         return "link-sandbox-a51055ca-5886-4ed1-a2b6-8293b4f43bf5"
+         return "link-sandbox-01acb0e5-b186-4a37-a23f-40d3e8c7a34d"
     }
 
     // Parse a Link redirect URL querystring into a HashMap for easy manipulation and access
