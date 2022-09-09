@@ -20,3 +20,20 @@ xcuserdata
 
 ## requirejs ##
 /examples/requirejs/public/vendor/*
+
+## android ##
+/webviews/android/LinkWebview/*.iml
+/webviews/android/LinkWebview/.gradle
+/webviews/android/LinkWebview/local.properties
+/webviews/android/LinkWebview/.idea/caches
+/webviews/android/LinkWebview/.idea/libraries
+/webviews/android/LinkWebview/.idea/modules.xml
+/webviews/android/LinkWebview/.idea/workspace.xml
+/webviews/android/LinkWebview/.idea/navEditor.xml
+/webviews/android/LinkWebview/.idea/assetWizardSettings.xml
+/webviews/android/LinkWebview/.DS_Store
+/webviews/android/LinkWebview/build
+/webviews/android/LinkWebview/captures
+/webviews/android/LinkWebview/.externalNativeBuild
+/webviews/android/LinkWebview/.cxx
+/webviews/android/LinkWebview/local.properties
