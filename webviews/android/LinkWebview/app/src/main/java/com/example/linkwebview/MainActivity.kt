@@ -14,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import androidx.activity.viewModels
+import kotlinx.coroutines.withContext
 
 class MainActivity : ComponentActivity() {
 
@@ -31,12 +32,13 @@ class MainActivity : ComponentActivity() {
         initWebview()
 
         // If receiving a redirect (from OAuth), reload the same URL with that redirect.
-        maybeHandleReceivedRedirectUri(intent)
+        maybeHandleOAuthRedirect(intent)
 
-        GlobalScope.launch(Dispatchers.IO) {
+        GlobalScope.launch(Dispatchers.Main) {
             val linkToken = generateLinkToken()
-
-            launch(Dispatchers.Main) {
+            if (linkToken == null) {
+                Toast.makeText(this@MainActivity, "Please provide a valid Link token", Toast.LENGTH_LONG).show()
+            } else {
                 viewModel.linkInitializationUrl =
                     "$PLAID_LINK_BASE_URL?isWebview=true&isMobile=true&token=$linkToken"
 
@@ -48,22 +50,45 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun maybeHandleReceivedRedirectUri(intent: Intent?) {
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        // Depending on your Activity's launch mode, it may receive the redirect here or in onCreate.
+        maybeHandleOAuthRedirect(intent)
+    }
+
+    /**
+     * You need to first create a link_token by calling /link/token/create from your backend.
+     * This call should never happen directly from the mobile client, as it risks exposing your API secret.
+     *
+     * To test this sample, you can generate a token from the following curl:
+     * curl -i -X POST --header 'Content-Type: application/json' -d'{"country_codes":["US"], "client_name": "<REPLACE>", "client_id":"<REPLACE>", "secret": "<REPLACE>>", "redirect_uri": "<REPLACE>", "language": "en", "products":["auth"], "user": {"client_user_id": "xxxx"}}' https://sandbox.plaid.com/link/token/create
+     */
+     private suspend fun generateLinkToken(): String? = withContext(Dispatchers.IO){
+        // TODO return token here
+        return@withContext null
+    }
+
+    /**
+     * When logging into a financial institution, the customer may leave your app to log in
+     * via an external browser or App2App using oAuth. After logging in, the user will get
+     * redirected to your application.
+     *
+     * For this to work, a number of things need to be set up:
+     * 1. Provide your domain as a redirect_uri while creating a Link token
+     * 2. Add an intent filter to receive redirects to the Android manifest.
+     *    In this example, replace `<data android:host="your.domain.com" />` with your domain
+     * 3. Host a `.well-known/assetlinks.json` file on your domain as explained by
+     *    https://developer.android.com/training/app-links/verify-android-applinks
+     */
+    private fun maybeHandleOAuthRedirect(intent: Intent?) {
         val receivedRedirectUri = intent?.data
         if (receivedRedirectUri != null) {
-            // Example url: "https://cdn.plaid.com/link/v2/stable/link.html?
-            // isWebview=true&token=SAME_GENERATED_LINK_TOKEN_AS_INITIAL_SESSION
-            // &receivedRedirectUri=https://example.com/oauth-page?oauth_state_id=9d5feadd-a873-43eb-97ba-422f35ce849b
+            Log.d("RedirectURI", receivedRedirectUri.toString())
+            // Example url: "https://myapp.com?oauth_state_id=9d5feadd-a873-43eb-97ba-422f35ce849b
             val newUrl = Uri.parse(viewModel.linkInitializationUrl).buildUpon().appendQueryParameter("receivedRedirectUri", receivedRedirectUri.toString()).toString()
             plaidLinkWebview.loadUrl(newUrl)
             return
         }
-    }
-
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        // Depending on your Activity's launch mode, it may receive the redirect here or in onCreate.
-        maybeHandleReceivedRedirectUri(intent)
     }
 
     /**
@@ -153,13 +178,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-    }
-
-    // NOTE: This should be generated from your backend.
-    // You can copy-paste a token in from a curl.
-    // curl -i -X POST --header 'Content-Type: application/json' -d'{"country_codes":["US"], "client_name": "<REPLACE>", "client_id":"<REPLACE>", "secret": "<REPLACE>>", "language": "en", "products":["auth"], "user": {"client_user_id": "xxxx"}}' https://sandbox.plaid.com/link/token/create
-    private suspend fun generateLinkToken(): String {
-         return "link-sandbox-1234" // Non-functional placeholder
     }
 
     // Parse a Link redirect URL querystring into a HashMap for easy manipulation and access
