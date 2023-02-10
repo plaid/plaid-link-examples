@@ -1,7 +1,5 @@
 # Link on the web
 
-![Examples of Plaid Link on the web](https://s3.amazonaws.com/plaid-blog-theme/production/2018/02/csa_lineup.png)
-
 Head to our [quickstart][quickstart] guide to get started with your Link integration. You can also clone complete example apps from the [quickstart repository][quickstart-github]:
 
 - [Ruby][quickstart-ruby]
