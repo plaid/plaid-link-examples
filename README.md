@@ -1,7 +1,6 @@
-## [Link WebView](webviews)
+This repo contains example code for less common Plaid integrations and use cases. Primary examples can
+be found in the core SDK repos:
 
-[![Examples of Plaid Link WebView](assets/link-webview-screenshot.png)](webviews)
-
-## [Link on the web](web)
-
-[![Examples of Plaid Link on the web](https://s3.amazonaws.com/plaid-blog-theme/production/2018/02/csa_lineup.png)](web)
+- [iOS](https://github.com/plaid/plaid-link-ios)
+- [Android](https://github.com/plaid/plaid-link-android)
+- [React Native](https://github.com/plaid/react-native-plaid-link-sdk)
