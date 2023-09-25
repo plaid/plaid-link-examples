@@ -105,9 +105,6 @@ class MainActivity : ComponentActivity() {
             cacheMode = WebSettings.LOAD_NO_CACHE
         }
 
-        // Optional: This allows all traffic to be debugged, should be turned off in production.
-        WebView.setWebContentsDebuggingEnabled(true)
-
         // Override the Webview's handler for redirects
         // Link communicates success and failure (analogous to the web's onSuccess and onExit
         // callbacks) via redirects.
