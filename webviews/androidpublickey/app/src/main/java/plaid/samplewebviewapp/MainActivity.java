@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDomStorageEnabled(true);
         webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
-        WebView.setWebContentsDebuggingEnabled(true);
 
         // Initialize Link by loading the Link initialization URL in the Webview
         plaidLinkWebview.loadUrl(linkInitializationUrl.toString());
